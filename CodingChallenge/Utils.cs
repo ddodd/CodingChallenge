@@ -136,5 +136,10 @@ namespace Utilities {
             }
         }
 
+        public static int GetVariedMidPoint(int num, int variance)
+        {
+            return num/2 + GetRandom().Next(-variance, variance + 1);
+        }
+
     }
 }

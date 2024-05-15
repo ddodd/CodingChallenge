@@ -8,11 +8,21 @@ namespace CodingChallenge
 {
     internal static class Sorting
     {
-        public static List<T> RiffleDeck<T>(List<T> deck) 
+        /// <summary>
+        /// Riffles a List<T> (i.e. deck of cards)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="deck">The List of T items</param>
+        /// <param name="midPointVariance">deck will be split at the midpoint plus or minus random integer between 0 and midPointVariance</param>
+        /// <returns>riffled List</returns>
+        public static List<T> RiffleDeck<T>(List<T> deck, int midPointVariance = 0)
         {
             var riffled = new List<T>();
             var rnd = GetRandom();
-            var midCard = (deck.Count / 2) + (5 - rnd.Next(0, 11));
+            //var midCard = (deck.Count / 2) + rnd.Next(-midPointVariance, midPointVariance + 1);
+            var midCard = GetVariedMidPoint(deck.Count, midPointVariance);
+
+            midCard = Math.Max(0, Math.Min(deck.Count, midCard));
             while (deck.Count > 0)
             {
                 var cards = rnd.Next(1, 3);
